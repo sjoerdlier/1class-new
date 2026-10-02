@@ -1,0 +1,4 @@
+node_modules
+dist
+scripts/raw*.json
+scripts/p.json
