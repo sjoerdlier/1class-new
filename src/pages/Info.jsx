@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import pages from '../data/pages.json'
 import { CONTACT, sanitizeHtml } from '../lib.js'
+import { useSeo, pageTitle } from '../seo.js'
 import '../shop.css'
 import { Phone } from '../components/Icons.jsx'
 
@@ -10,7 +11,8 @@ const sentence = (t) => t.charAt(0) + t.slice(1).toLowerCase()
 const tidy = (html) => html.replace(/<p>\s*<strong>([^<a-z]{4,})<\/strong>\s*<\/p>/g, (_, t) => `<h2>${sentence(t.trim())}</h2>`)
 const prepare = (html) => sanitizeHtml(tidy(html))
 
-function Page({ title, lead, html, children }) {
+function Page({ title, lead, html, children, seo = [title, lead] }) {
+  useSeo({ title: pageTitle(seo[0]), description: seo[1] })
   return (
     <div className="wrap section narrow">
       <nav className="crumbs"><Link to="/">Home</Link> / <span>{title}</span></nav>
@@ -22,16 +24,20 @@ function Page({ title, lead, html, children }) {
   )
 }
 
-export const About = () => <Page title="Over ons" lead="Informatie en producten voor het stallen van uw voertuig, van een ervaren team uit Ede." html={pages.over}>
+export const About = () => <Page title="Over ons" lead="Informatie en producten voor het stallen van uw voertuig, van een ervaren team uit Ede." html={pages.over}
+  seo={['Over ons', 'Over 1ClassAdditions: informatie en producten voor het stallen van uw klassieker, van een ervaren team uit Ede (Imparts B.V.).']}>
   <div className="callout"><b>Onderdeel van Imparts B.V.</b><p>Dezelfde mensen, dezelfde kennis van klassiekers. {CONTACT.address}.</p><a className="btn" href={CONTACT.phoneHref}><Phone size={16} /> Bel ons</a></div>
 </Page>
 // Het oude retourgedeelte (dienst-tekst, onvolledig) is vervangen door de pagina Herroeping.
 const shippingHtml = pages.verzenden.split(/<p>\s*<strong>RETOURNEREN<\/strong>\s*<\/p>/)[0]
-export const Shipping = () => <Page title="Verzenden & retourneren" html={shippingHtml}>
+export const Shipping = () => <Page title="Verzenden & retourneren" html={shippingHtml}
+  seo={['Verzenden & retourneren', 'Verzendinformatie van 1ClassAdditions: gratis verzending vanaf € 150, levering op voorraad en uw herroepingsrecht.']}>
   <div className="callout"><b>Retourneren en herroepen</b><p>Informatie over uw herroepingsrecht, het terugsturen van een bestelling en het modelformulier vindt u op onze pagina <Link to="/herroeping">Herroepingsrecht en retourneren</Link>.</p></div>
 </Page>
-export const Knowledge = () => <Page title="Fabels & Feiten" lead="Wat kan een autohoes wel, en wat niet? Eerlijke antwoorden van de specialist." html={pages.feiten} />
-export const Dealers = () => <Page title="Dealers" lead="Ons assortiment is ook verkrijgbaar bij geselecteerde bedrijven in Nederland, België en Duitsland." html={pages.dealers.replace(/^\s*<p>.*?<\/p>/, '')} />
+export const Knowledge = () => <Page title="Fabels & Feiten" lead="Wat kan een autohoes wel, en wat niet? Eerlijke antwoorden van de specialist." html={pages.feiten}
+  seo={['Fabels & Feiten over autohoezen', 'Wat kan een autohoes wel, en wat niet? Condens, katoen, stretch- en Supertex-hoezen: eerlijke antwoorden van de specialist.']} />
+export const Dealers = () => <Page title="Dealers" lead="Ons assortiment is ook verkrijgbaar bij geselecteerde bedrijven in Nederland en België." html={pages.dealers.replace(/^\s*<p>.*?<\/p>/, '')}
+  seo={['Dealers', 'Ons assortiment is ook verkrijgbaar bij geselecteerde dealers in Nederland en België.']} />
 
 const FAQ = [
   ['Waarom een hoes als mijn auto binnen staat?', 'Een goede hoes beschermt tegen stof en krassen, bijvoorbeeld van kinderfietsjes, de grasmaaier of de rits van uw jas.'],
@@ -50,7 +56,8 @@ export function Service() {
     setSent(true)
   }
   return (
-    <Page title="Klantenservice" lead="Wilt u meer weten over een van onze producten? Wij informeren u graag.">
+    <Page title="Klantenservice" lead="Wilt u meer weten over een van onze producten? Wij informeren u graag."
+      seo={['Klantenservice & contact', `Vragen over een product? Bel ${CONTACT.phone} of mail ${CONTACT.email}. Ma t/m vr 09:00 - 17:30, ${CONTACT.address.replace(', 6718 XN', '')}.`]}>
       <div className="service-grid">
         <div>
           <div className="callout"><b>Bel ons</b><a className="big" href={CONTACT.phoneHref}>{CONTACT.phone}</a><p>ma t/m vr 09:00 – 17:30, zaterdag gesloten.</p><p>{CONTACT.address}</p></div>

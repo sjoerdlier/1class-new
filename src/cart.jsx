@@ -1,6 +1,7 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { productBySlug } from './lib.js'
 import { buildLine, cleanQty, lineKey, sanitizeLines, totals } from './pricing.js'
+import { announce } from './announce.js'
 
 const Ctx = createContext(null)
 export const useCart = () => useContext(Ctx)
@@ -44,6 +45,8 @@ export function CartProvider({ children }) {
   const [ready, setReady] = useState(false)
   const [open, setOpen] = useState(false)
   const [code, setCode] = useState('')
+  const linesRef = useRef(lines)
+  linesRef.current = lines
 
   useEffect(() => {
     setLines(readLines())
@@ -70,9 +73,14 @@ export function CartProvider({ children }) {
       if (hit) return ls.map((l) => (l.key === key ? { ...l, qty: cleanQty(l.qty + cleanQty(qty)) } : l))
       return [...ls, buildLine(product, variant, qty)]
     })
+    announce(`${product.title} toegevoegd aan de winkelwagen`)
     setOpen(true)
   }, [])
-  const setQty = useCallback((key, qty) => setLines((ls) => (Number(qty) < 1 ? ls.filter((l) => l.key !== key) : ls.map((l) => (l.key === key ? { ...l, qty: cleanQty(qty) } : l)))), [])
+  const setQty = useCallback((key, qty) => {
+    const line = linesRef.current.find((l) => l.key === key)
+    if (line) announce(Number(qty) < 1 ? `${line.title} verwijderd uit de winkelwagen` : `Aantal ${line.title}: ${cleanQty(qty)}`)
+    setLines((ls) => (Number(qty) < 1 ? ls.filter((l) => l.key !== key) : ls.map((l) => (l.key === key ? { ...l, qty: cleanQty(qty) } : l))))
+  }, [])
   const clear = useCallback(() => setLines([]), [])
 
   const value = useMemo(() => {

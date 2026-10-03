@@ -1,8 +1,11 @@
+import { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../cart.jsx'
 import { eur, FREE_SHIPPING, PROMO } from '../lib.js'
 import { lineTotal, MAX_QTY, PROMO_TEXT } from '../pricing.js'
 import { Close, Minus, Plus, Truck } from './Icons.jsx'
+import Portal from '../a11y/Portal.jsx'
+import { useDialog } from '../a11y/useDialog.js'
 import '../shop.css'
 
 // Voortgang naar gratis verzending. `total` is het bedrag na korting.
@@ -37,52 +40,73 @@ export function OrderTotals({ c }) {
 
 export default function CartDrawer() {
   const c = useCart()
+  const close = useCallback(() => c.setOpen(false), [c.setOpen])
+  const ref = useDialog(c.open, close)
   if (!c.open) return null
+
+  // Na verwijderen verdwijnt de knop waar focus op stond: zet focus op de volgende regel, anders op "Sluiten".
+  const remove = (e, key) => {
+    const li = e.currentTarget.closest('li')
+    const sibling = li?.nextElementSibling || li?.previousElementSibling
+    c.setQty(key, 0)
+    setTimeout(() => {
+      const root = ref.current
+      const target = sibling?.isConnected ? sibling.querySelector('.rm') : root?.querySelector('.empty a, [data-autofocus]')
+      target?.focus()
+    }, 0)
+  }
+  const change = (key, qty, e) => {
+    if (e.currentTarget.getAttribute('aria-disabled') === 'true') return
+    c.setQty(key, qty)
+  }
+
   return (
-    <div className="drawer-wrap" role="dialog" aria-label="Winkelwagen">
-      <div className="scrim" onClick={() => c.setOpen(false)} />
-      <aside className="drawer">
-        <header>
-          <h2>Winkelwagen <span>({c.count})</span></h2>
-          <button className="btn-icon plain" onClick={() => c.setOpen(false)} aria-label="Sluiten"><Close /></button>
-        </header>
-        {c.lines.length === 0 ? (
-          <div className="empty"><p>Uw winkelwagen is leeg.</p><Link className="btn" to="/c" onClick={() => c.setOpen(false)}>Bekijk de producten</Link></div>
-        ) : (
-          <>
-            <ShipBar total={c.total} />
-            <ul className="lines">
-              {c.lines.map((l) => (
-                <li key={l.key}>
-                  <img src={l.image} alt="" />
-                  <div>
-                    <Link to={`/p/${l.slug}`} onClick={() => c.setOpen(false)}>{l.title}</Link>
-                    {l.variant && <small>{l.variant}</small>}
-                    <div className="qty sm">
-                      <button onClick={() => c.setQty(l.key, l.qty - 1)} disabled={l.qty <= 1} aria-label="Minder"><Minus size={14} /></button>
-                      <span>{l.qty}</span>
-                      <button onClick={() => c.setQty(l.key, l.qty + 1)} disabled={l.qty >= MAX_QTY} aria-label="Meer"><Plus size={14} /></button>
+    <Portal>
+      <div className="drawer-wrap" role="dialog" aria-modal="true" aria-labelledby="cart-title" ref={ref}>
+        <div className="scrim" onClick={close} />
+        <div className="drawer">
+          <header>
+            <h2 id="cart-title">Winkelwagen <span>({c.count})</span></h2>
+            <button data-autofocus className="btn-icon plain" onClick={close} aria-label="Winkelwagen sluiten"><Close /></button>
+          </header>
+          {c.lines.length === 0 ? (
+            <div className="empty"><p>Uw winkelwagen is leeg.</p><Link className="btn" to="/c" onClick={close}>Bekijk de producten</Link></div>
+          ) : (
+            <>
+              <ShipBar total={c.total} />
+              <ul className="lines" aria-label="Producten in uw winkelwagen">
+                {c.lines.map((l) => (
+                  <li key={l.key}>
+                    <img src={l.image} alt="" />
+                    <div>
+                      <Link to={`/p/${l.slug}`} onClick={close}>{l.title}</Link>
+                      {l.variant && <small>{l.variant}</small>}
+                      <div className="qty sm">
+                        <button type="button" onClick={(e) => change(l.key, l.qty - 1, e)} aria-disabled={l.qty <= 1} aria-label={`Minder: ${l.title}`}><Minus size={14} /></button>
+                        <output aria-label={`Aantal ${l.title}`}>{l.qty}</output>
+                        <button type="button" onClick={(e) => change(l.key, l.qty + 1, e)} aria-disabled={l.qty >= MAX_QTY} aria-label={`Meer: ${l.title}`}><Plus size={14} /></button>
+                      </div>
+                      <button type="button" className="rm" onClick={(e) => remove(e, l.key)} aria-label={`Verwijder ${l.title}`}>Verwijderen</button>
                     </div>
-                    <button className="rm" onClick={() => c.setQty(l.key, 0)}>Verwijderen</button>
-                  </div>
-                  <b>{eur(lineTotal(l))}</b>
-                </li>
-              ))}
-            </ul>
-            <footer>
-              {c.codeStatus !== 'ok' && c.subtotal > 0 && (
-                <p className="hint">
-                  {PROMO_TEXT}.
-                  {c.subtotal < PROMO.min && <> Nog <b>{eur(c.missingForPromo)}</b> te gaan.</>}
-                </p>
-              )}
-              <OrderTotals c={c} />
-              <Link className="btn block" to="/bestellen" onClick={() => c.setOpen(false)}>Naar bestelaanvraag</Link>
-              <button className="link" onClick={() => c.setOpen(false)}>Verder winkelen</button>
-            </footer>
-          </>
-        )}
-      </aside>
-    </div>
+                    <b>{eur(lineTotal(l))}</b>
+                  </li>
+                ))}
+              </ul>
+              <footer>
+                {c.codeStatus !== 'ok' && c.subtotal > 0 && (
+                  <p className="hint">
+                    {PROMO_TEXT}.
+                    {c.subtotal < PROMO.min && <> Nog <b>{eur(c.missingForPromo)}</b> te gaan.</>}
+                  </p>
+                )}
+                <OrderTotals c={c} />
+                <Link className="btn block" to="/bestellen" onClick={close}>Naar bestelaanvraag</Link>
+                <button type="button" className="link" onClick={close}>Verder winkelen</button>
+              </footer>
+            </>
+          )}
+        </div>
+      </div>
+    </Portal>
   )
 }

@@ -36,7 +36,7 @@ for (const lang of ['nl', 'de', 'fr']) {
   addBoth(`${L}/service/about`, '/over-ons')
   addBoth(`${L}/service/shipping-returns`, '/verzenden')
   addBoth(`${L}/service/payment-methods`, '/klantenservice')
-  addBoth(`${L}/service/general-terms-conditions`, legal('/algemene-voorwaarden', '/klantenservice'))
+  addBoth(`${L}/service/general-terms-conditions`, legal('/voorwaarden', '/klantenservice'))
   addBoth(`${L}/service/disclaimer`, legal('/disclaimer', '/klantenservice'))
   addBoth(`${L}/service/privacy-policy`, legal('/privacy', '/klantenservice'))
   addBoth(`${L}/service/legal-guarantee-notice`, legal('/wettelijke-garantie', '/klantenservice'))

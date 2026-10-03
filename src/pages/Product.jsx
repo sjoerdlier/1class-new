@@ -1,11 +1,19 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard.jsx'
+import Img from '../components/Img.jsx'
+import { useSeo, pageTitle, truncate, strip } from '../seo.js'
 import { Check, Minus, Plus, Shield, Truck, Phone } from '../components/Icons.jsx'
 import { useCart } from '../cart.jsx'
-import { productBySlug, resolveSlug, mainCat, catById, eur, hasRange, CONTACT, FREE_SHIPPING, sanitizeHtml, leadText, cheapestIndex, relatedProducts } from '../lib.js'
+import { productBySlug, mainCat, catById, catBySlug, eur, hasRange, CONTACT, FREE_SHIPPING, sanitizeHtml, leadText, cheapestIndex, relatedProducts } from '../lib.js'
 import { MAX_QTY } from '../pricing.js'
+import rawRedirects from '../data/redirects.json'
 import '../shop.css'
+
+// Oude adressen -> nieuwe slug. redirects.json bevat kale slugs ({ oud: nieuw }); '/p/oud' mag ook.
+const bare = (u) => String(u).replace(/^\/p\//, '').replace(/\/$/, '')
+const REDIRECTS = Object.fromEntries((Array.isArray(rawRedirects) ? rawRedirects.map((r) => [r?.source, r?.destination]) : Object.entries(rawRedirects)).filter(([a, b]) => a && b).map(([a, b]) => [bare(a), bare(b)]))
+const resolveSlug = (slug) => (Object.prototype.hasOwnProperty.call(REDIRECTS, slug) ? REDIRECTS[slug] : slug)
 
 // Specificaties alleen tonen als de data ze heeft: [{label, value}], [[label, value]] of {label: value}.
 function specRows(p) {
@@ -16,7 +24,7 @@ function specRows(p) {
 }
 
 function NotFound() {
-  useEffect(() => { document.title = 'Product niet gevonden — 1ClassAdditions' }, [])
+  useSeo({ title: pageTitle('Product niet gevonden'), robots: 'noindex, follow' })
   return (
     <div className="wrap section narrow">
       <h1>Product niet gevonden</h1>
@@ -50,7 +58,6 @@ function ProductPage({ p }) {
   const vi = pick ?? cheapest
   const multi = p.variants.length > 1
 
-  useEffect(() => { document.title = `${p.title} — 1ClassAdditions` }, [p])
 
   // Mobiele koopbalk: alleen zichtbaar als de eigen koopknop en de footer uit beeld zijn.
   useEffect(() => {
@@ -76,6 +83,9 @@ function ProductPage({ p }) {
   const specs = specRows(p)
   const inStock = p.stock === 'in_stock' || p.inStock === true // alleen als de data het expliciet zegt
   const lead = leadText(p.short)
+  const sizeChoice = p.cats.includes(catBySlug('autohoezen')?.id)
+  const seoDesc = `${truncate(strip(p.short || p.content), 135)} ${hasRange(p) ? 'Vanaf' : 'Prijs:'} ${eur(p.priceFrom).replace(/\s/g, ' ')} incl. btw.`
+  useSeo({ title: pageTitle(p.title), description: seoDesc })
 
   const onAdd = () => {
     add(p, v, qty)
@@ -92,10 +102,10 @@ function ProductPage({ p }) {
 
       <div className="pdp">
         <div className="gallery">
-          <div className="main-img"><img src={p.images[img]} alt={p.title} /></div>
+          <div className="main-img"><Img key={p.images[img]} src={p.images[img]} alt={p.images.length > 1 ? `${p.title} - foto ${img + 1}` : p.title} sizes="(max-width: 1060px) 100vw, 600px" priority={img === 0} /></div>
           {p.images.length > 1 && (
             <div className="thumbs">
-              {p.images.map((s, i) => <button key={s} className={i === img ? 'on' : ''} onClick={() => setImg(i)} aria-label={`Foto ${i + 1}`}><img src={s} alt="" /></button>)}
+              {p.images.map((s, i) => <button key={s} className={i === img ? 'on' : ''} onClick={() => setImg(i)} aria-label={`Foto ${i + 1}`}><Img src={s} alt="" small sizes="72px" /></button>)}
             </div>
           )}
         </div>
@@ -113,7 +123,7 @@ function ProductPage({ p }) {
 
           {multi && (
             <fieldset className="variants">
-              <legend>Kies uitvoering</legend>
+              <legend>{sizeChoice ? 'Kies uw maat' : 'Kies uitvoering'}</legend>
               <div>
                 {p.variants.map((x, i) => (
                   <button type="button" key={x.id} className={i === vi ? 'on' : ''} aria-pressed={i === vi} onClick={() => setPick(i)} disabled={x.available === false}>
@@ -121,7 +131,7 @@ function ProductPage({ p }) {
                   </button>
                 ))}
               </div>
-              <span className="picked">Gekozen: <b>{v?.title}</b>{hasRange(p) ? ' (goedkoopste uitvoering is voorgeselecteerd)' : ''}</span>
+              <span className="picked">Gekozen: <b>{v?.title}</b>{hasRange(p) && pick === null ? ' (goedkoopste voorgeselecteerd)' : ''}</span>
             </fieldset>
           )}
 

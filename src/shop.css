@@ -12,13 +12,14 @@
 .qty.sm button:disabled { opacity: .35; cursor: not-allowed; }
 
 /* Bestelaanvraag */
-.request-note { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--navy); border-radius: 12px; padding: 14px 16px; margin: 4px 0 16px; font-size: .93rem; }
+.request-note { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--navy); border-radius: var(--r-sm); padding: 14px 16px; margin: 4px 0 16px; font-size: .93rem; }
 .request-note p { margin: 0 0 .5em; }
 .request-note p:last-child { margin: 0; }
-.consent { display: flex !important; gap: 10px; align-items: flex-start; font-size: .92rem; }
-.consent input { width: 20px !important; height: 20px; margin-top: 2px; flex: 0 0 auto; padding: 0 !important; }
-.sent-box { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
-.sent-box textarea { width: 100%; font: inherit; font-size: .88rem; border: 1.5px solid var(--line); border-radius: 10px; padding: 12px; background: var(--cream); margin: 8px 0 16px; }
+.consent { display: flex !important; gap: 12px; align-items: flex-start; font-size: .92rem; font-weight: 500; }
+.consent a { color: var(--red); }
+.consent input { width: 24px !important; height: 24px; min-height: 0 !important; margin-top: 0; flex: 0 0 auto; padding: 0 !important; accent-color: var(--navy); }
+.sent-box { background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 28px; }
+.sent-box textarea { width: 100%; font: inherit; font-size: .88rem; border: 1.5px solid var(--field); border-radius: var(--r-sm); padding: 12px; background: var(--cream); margin: 8px 0 16px; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 16px 0; }
 .code-in .msg { font-size: .85rem; }
 
@@ -27,6 +28,7 @@
 .variants .picked { display: block; font-size: .88rem; color: var(--muted); margin-top: 8px; }
 .stockline { display: flex; gap: 8px; align-items: center; font-size: .92rem; margin: 0 0 16px; }
 .stockline a { color: var(--navy); }
+.request-note a, .legal-page a, .sent-box a { color: var(--red); }
 .specs { display: grid; grid-template-columns: minmax(120px, 220px) 1fr; gap: 6px 20px; max-width: 75ch; margin: 0; }
 .specs dt { font-weight: 600; }
 .specs dd { margin: 0; }
@@ -51,13 +53,13 @@
 .legal-page h2:first-of-type { margin-top: 1em; }
 .legal-page ul { padding-left: 1.2em; }
 .legal-page li { margin-bottom: .35em; }
-.legal-page .formbox { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; }
+.legal-page .formbox { background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 18px 22px; }
 .legal-page .formbox p { margin: 0 0 .6em; }
 .prose h2 { font-size: 1.25rem; margin: 1.6em 0 .4em; }
 
 /* Mobiel: galerij en koopblok mogen de pagina niet breder maken dan het scherm */
 .pdp > * { min-width: 0; }
-.pdp .thumbs { overflow-x: auto; max-width: 100%; }
+.pdp .thumbs { max-width: 100%; }
 .pdp .thumbs button { flex: 0 0 auto; }
 .grid > * { min-width: 0; }
 .card-foot { flex-wrap: wrap; gap: 8px; }

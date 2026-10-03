@@ -1,6 +1,9 @@
+import { announce } from '../announce.js'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProductCard from '../components/ProductCard.jsx'
+import Img from '../components/Img.jsx'
+import { useSeo, HOME_TITLE, HOME_DESC } from '../seo.js'
 import { Arrow, Award, Check, Clock, Copy, Shield, Truck } from '../components/Icons.jsx'
 import { catBySlug, featured, products, PROMO, FREE_SHIPPING, eur, CONTACT } from '../lib.js'
 import { PROMO_TEXT } from '../pricing.js'
@@ -41,7 +44,7 @@ function Finder() {
           ))}
         </div>
         <div className="finder-a">
-          {cat?.imageUrl && <img src={cat.imageUrl} alt="" />}
+          {cat?.imageUrl && <Img src={cat.imageUrl} alt="" w={760} h={550} sizes="(max-width: 1060px) 100vw, 520px" />}
           <div>
             <h3>{cat?.title}</h3>
             <p>{pick.why}</p>
@@ -59,6 +62,7 @@ function Promo() {
     try {
       await navigator.clipboard.writeText(PROMO.code)
       setCopied(true)
+      announce('Code gekopieerd')
       setTimeout(() => setCopied(false), 2000)
     } catch { /* geen toegang tot klembord: de code staat zichtbaar op de knop */ }
   }
@@ -82,7 +86,7 @@ function Promo() {
 export default function Home() {
   const tiles = ['autohoezen', 'stalling', 'onderhoud', 'accessoires'].map(catBySlug).filter(Boolean)
   const hero = catBySlug('autohoezen')
-  const nCovers = products.filter((p) => p.cats.includes(hero?.id)).length
+  useSeo({ title: HOME_TITLE, description: HOME_DESC })
 
   return (
     <>
@@ -94,7 +98,7 @@ export default function Home() {
             <p className="lead">Hoezen, stalling en onderhoud voor klassieke en moderne auto’s. Uitgezocht door liefhebbers, met persoonlijk advies als u er niet uitkomt.</p>
             <div className="cta-row">
               <Link className="btn lg" to="/c/autohoezen">Bekijk autohoezen <Arrow size={18} /></Link>
-              <a className="btn-ghost lg" href={CONTACT.phoneHref}>Advies? Bel {CONTACT.phone}</a>
+              <a className="btn-ghost lg" href={CONTACT.phoneHref}>Persoonlijk advies? Bel ons</a>
             </div>
             <ul className="ticks">
               <li><Check size={16} /> Gratis verzending vanaf {eur(FREE_SHIPPING)}</li>
@@ -103,8 +107,8 @@ export default function Home() {
             </ul>
           </div>
           <Link to="/c/autohoezen" className="hero-img" aria-label="Autohoezen">
-            {hero?.imageUrl && <img src={hero.imageUrl} alt="Autohoes over een klassieke auto" />}
-            <span className="hero-tag"><b>{nCovers}</b> hoezen, van binnen tot buiten</span>
+            {hero?.imageUrl && <Img src={hero.imageUrl} alt="Autohoes over een klassieke auto" w={760} h={550} sizes="(max-width: 1060px) 100vw, 600px" priority />}
+            <span className="hero-tag">Binnen- en buitenhoezen</span>
           </Link>
         </div>
       </section>
@@ -120,7 +124,7 @@ export default function Home() {
         <div className="tiles">
           {tiles.map((c) => (
             <Link key={c.id} to={`/c/${c.slug}`} className="tile">
-              {c.imageUrl && <img src={c.imageUrl} alt="" loading="lazy" />}
+              {c.imageUrl && <Img src={c.imageUrl} alt="" w={760} h={550} sizes="(max-width: 760px) 50vw, 300px" />}
               <div><h3>{c.title}</h3><span>{products.filter((p) => p.cats.includes(c.id)).length} producten <Arrow size={16} /></span></div>
             </Link>
           ))}
@@ -156,8 +160,8 @@ export default function Home() {
         <div className="wrap imparts-in">
           <div>
             <span className="eyebrow light">Onderdeel van Imparts B.V.</span>
-            <h2>Een echt bedrijf, met echte mensen.</h2>
-            <p>Achter 1ClassAdditions zit Imparts uit Ede, specialist in Britse auto-onderdelen. Twijfelt u? Bel of mail ons. U krijgt antwoord van iemand die verstand heeft van klassiekers.</p>
+            <h2>Achter de webshop: Imparts uit Ede</h2>
+            <p>1ClassAdditions is onderdeel van Imparts B.V., specialist in Britse auto-onderdelen. Twijfelt u? Bel of mail ons. U spreekt iemand die verstand heeft van klassiekers.</p>
           </div>
           <div className="imparts-cta">
             <a className="btn light" href={CONTACT.phoneHref}>{CONTACT.phone}</a>

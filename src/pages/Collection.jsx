@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard.jsx'
 import { products, catBySlug, childrenOf, catById, search, topCategories } from '../lib.js'
+import { useSeo, pageTitle, truncate, strip } from '../seo.js'
 import '../shop.css'
 
 const SORTS = {
@@ -32,7 +33,14 @@ export default function Collection() {
     return fn ? [...l].sort(fn) : l
   }, [base, brand, sort])
 
-  if (slug && !cat) return <div className="wrap section"><h1>Categorie niet gevonden</h1><Link to="/c">Bekijk alle producten</Link></div>
+  const missing = slug && !cat
+  const seoName = q ? `Zoekresultaten voor “${q}”` : cat ? cat.title : missing ? 'Categorie niet gevonden' : 'Alle producten'
+  const seoDesc = missing ? undefined : q ? `Zoekresultaten voor “${q}” bij 1ClassAdditions.`
+    : cat ? truncate(`${strip(cat.description || '') || `${cat.title} van 1ClassAdditions voor uw klassieke auto.`} ${base.length} producten.`)
+    : 'Bekijk het volledige assortiment van 1ClassAdditions: autohoezen, stalling, onderhoud en accessoires voor klassieke auto’s.'
+  useSeo({ title: pageTitle(seoName), description: seoDesc, robots: q || missing ? 'noindex, follow' : undefined })
+
+  if (missing) return <div className="wrap section"><h1>Categorie niet gevonden</h1><p className="lead">Deze categorie bestaat niet (meer). U vindt ons assortiment bij alle producten.</p><Link className="btn" to="/c">Bekijk alle producten</Link></div>
 
   const kids = cat ? childrenOf(cat.id) : []
   const parent = cat?.parent ? catById(cat.parent) : null
@@ -57,7 +65,7 @@ export default function Collection() {
       )}
 
       <div className="toolbar">
-        <span>{list.length} {list.length === 1 ? 'product' : 'producten'}</span>
+        <span role="status" aria-live="polite">{list.length} {list.length === 1 ? 'product' : 'producten'}</span>
         <div>
           {(brands.length > 1 || brand) && (
             <select value={brand} onChange={(e) => setBrand(e.target.value)} aria-label="Merk">
@@ -83,7 +91,7 @@ export default function Collection() {
           {q && <div className="chips">{topCategories.map((k) => <Link key={k.id} to={`/c/${k.slug}`}>{k.title}</Link>)}</div>}
         </div>
       ) : (
-        <div className="grid">{list.map((p) => <ProductCard key={p.id} p={p} />)}</div>
+        <div className="grid">{list.map((p, i) => <ProductCard key={p.id} p={p} priority={i < 4} />)}</div>
       )}
     </div>
   )

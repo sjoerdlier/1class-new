@@ -16,3 +16,9 @@ Deze gegevens kon ik niet uit de code of de oude website halen. Ze staan daarom 
 10. Klachtenafhandeling: reactietermijn, en of u bent aangesloten bij een geschillencommissie (alleen noemen als dat zo is).
 11. Het persoonlijke 06-nummer dat op de Klantenservice-pagina stond (+31 6 83 24 04 11) is van die pagina gehaald. Wilt u het toch tonen? Alleen met toestemming van de eigenaar van het nummer.
 12. Echte bestelling: nu loopt alles via een e-mail die de klant zelf verstuurt. Voor betalen op de site is een betaalprovider en een server nodig (prijzen en korting moeten dan op de server berekend worden).
+
+## Toegankelijkheid en ontwerp (ronde 2)
+- Laat de site testen met een schermlezer (NVDA of VoiceOver) en op een echte telefoon/tablet; automatische tests dekken dit niet volledig.
+- Footer noemt geen betaalmethoden en geen nieuwsbrief meer. Voeg betaalmethoden pas toe als ze echt beschikbaar zijn.
+- Foto's bevatten een watermerk en een witte rand; voor een nette uitstraling zijn nieuwe foto's zonder watermerk nodig.
+- Meta-beschrijving in index.html en prerender (HOME_DESC) noemt nog '25 jaar'.

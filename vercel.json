@@ -151,7 +151,7 @@
     },
     {
       "source": "/nl/service/general-terms-conditions",
-      "destination": "/klantenservice",
+      "destination": "/voorwaarden",
       "statusCode": 301
     },
     {
@@ -161,7 +161,7 @@
     },
     {
       "source": "/nl/service/privacy-policy",
-      "destination": "/klantenservice",
+      "destination": "/privacy",
       "statusCode": 301
     },
     {
@@ -916,7 +916,7 @@
     },
     {
       "source": "/de/service/general-terms-conditions",
-      "destination": "/klantenservice",
+      "destination": "/voorwaarden",
       "statusCode": 301
     },
     {
@@ -926,7 +926,7 @@
     },
     {
       "source": "/de/service/privacy-policy",
-      "destination": "/klantenservice",
+      "destination": "/privacy",
       "statusCode": 301
     },
     {
@@ -1681,7 +1681,7 @@
     },
     {
       "source": "/fr/service/general-terms-conditions",
-      "destination": "/klantenservice",
+      "destination": "/voorwaarden",
       "statusCode": 301
     },
     {
@@ -1691,7 +1691,7 @@
     },
     {
       "source": "/fr/service/privacy-policy",
-      "destination": "/klantenservice",
+      "destination": "/privacy",
       "statusCode": 301
     },
     {

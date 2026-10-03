@@ -33,14 +33,17 @@ const CATS = categories()
 const catById = (id) => CATS.find((c) => c.id === id)
 const eur = (n) => new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(n).replace(/\s/g, ' ')
 const HOME_TITLE = `${SITE_NAME} — Autohoezen, stalling & onderhoud voor klassiekers`
-const HOME_DESC = 'Al 25 jaar dé specialist in autohoezen, stalling en onderhoud voor klassieke auto’s. Onderdeel van Imparts, Ede.'
+const HOME_DESC = 'Autohoezen, stalling en onderhoud voor klassieke auto’s, van Imparts B.V. uit Ede. Gratis verzending vanaf € 150.'
 
 const INFO = {
   '/over-ons': ['Over ons', 'Over 1ClassAdditions: informatie en producten voor het stallen van uw klassieker, van een ervaren team uit Ede (Imparts B.V.).'],
-  '/verzenden': ['Verzenden & retourneren', 'Voor 15:00 besteld, volgende werkdag in huis (indien op voorraad). Lees alles over verzenden, 14 dagen retourneren en terugbetaling.'],
+  '/verzenden': ['Verzenden & retourneren', 'Lees alles over verzenden, levertijden, retourneren en terugbetaling.'],
   '/kennis': ['Fabels & Feiten over autohoezen', 'Wat kan een autohoes wel, en wat niet? Condens, katoen, stretch- en Supertex-hoezen: eerlijke antwoorden van de specialist.'],
-  '/dealers': ['Dealers', 'Ons assortiment is ook verkrijgbaar bij geselecteerde dealers in Nederland, België en Duitsland.'],
+  '/dealers': ['Dealers', 'Ons assortiment is ook verkrijgbaar bij geselecteerde dealers in Nederland en België.'],
   '/klantenservice': ['Klantenservice & contact', 'Vragen over een product? Bel +31 (0)26 442 99 37 of mail sales@1classadditions.nl. Ma t/m vr 09:00 - 17:30, Bonnetstraat 33, Ede.'],
+  '/privacy': ['Privacyverklaring', 'Welke gegevens wij vragen bij een bestelaanvraag, waarvoor wij ze gebruiken en welke rechten u heeft.'],
+  '/voorwaarden': ['Algemene voorwaarden', 'De voorwaarden voor bestellingen bij 1ClassAdditions, onderdeel van Imparts B.V.'],
+  '/herroeping': ['Herroepingsrecht en retourneren', 'Uw recht om binnen 14 dagen te herroepen en hoe u een product retourneert.'],
   '/bestellen': ['Bestellen', 'Rond uw bestelling bij 1ClassAdditions af.'],
 }
 const humanize = (r) => { const s = r.split('/').filter(Boolean).pop().replace(/-/g, ' '); return s.charAt(0).toUpperCase() + s.slice(1) }
