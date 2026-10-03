@@ -1,0 +1,15 @@
+{
+  "name": "1ClassAdditions",
+  "short_name": "1Class",
+  "description": "Autohoezen, stalling en onderhoud voor klassieke auto's.",
+  "lang": "nl",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f7f4ee",
+  "theme_color": "#12254a",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

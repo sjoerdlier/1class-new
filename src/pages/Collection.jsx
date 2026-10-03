@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
-import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard.jsx'
-import { products, catBySlug, childrenOf, catById, search, eur } from '../lib.js'
+import { products, catBySlug, childrenOf, catById, search, topCategories } from '../lib.js'
+import '../shop.css'
 
 const SORTS = {
   pop: ['Aanbevolen', null],
@@ -16,11 +17,15 @@ export default function Collection() {
   const q = sp.get('q') || ''
   const cat = slug ? catBySlug(slug) : null
   const [sort, setSort] = useState('pop')
-  const [brand, setBrand] = useState('')
+  // Het merkfilter hoort bij de huidige categorie/zoekopdracht en vervalt vanzelf bij wisselen.
+  const scope = `${slug}|${q}`
+  const [brandSel, setBrandSel] = useState({ scope: '', brand: '' })
   const [open, setOpen] = useState(false)
 
   const base = useMemo(() => (q ? search(q) : cat ? products.filter((p) => p.cats.includes(cat.id)) : products), [q, cat])
   const brands = useMemo(() => [...new Set(base.map((p) => p.brand).filter(Boolean))].sort(), [base])
+  const brand = brandSel.scope === scope && brands.includes(brandSel.brand) ? brandSel.brand : ''
+  const setBrand = (b) => setBrandSel({ scope, brand: b })
   const list = useMemo(() => {
     let l = brand ? base.filter((p) => p.brand === brand) : base
     const fn = SORTS[sort][1]
@@ -54,7 +59,7 @@ export default function Collection() {
       <div className="toolbar">
         <span>{list.length} {list.length === 1 ? 'product' : 'producten'}</span>
         <div>
-          {brands.length > 1 && (
+          {(brands.length > 1 || brand) && (
             <select value={brand} onChange={(e) => setBrand(e.target.value)} aria-label="Merk">
               <option value="">Alle merken</option>
               {brands.map((b) => <option key={b}>{b}</option>)}
@@ -68,8 +73,14 @@ export default function Collection() {
 
       {list.length === 0 ? (
         <div className="empty-state">
-          <p>Niets gevonden. Zoek je iets specifieks? Wij helpen je graag verder.</p>
-          <Link className="btn" to="/klantenservice">Neem contact op</Link>
+          {q ? <h2>Geen resultaten voor “{q}”</h2> : <h2>Geen producten gevonden</h2>}
+          {q && <ul><li>Controleer de spelling of probeer een korter zoekwoord.</li><li>Zoek bijvoorbeeld op een merk of categorie, zoals Autoglym, CTEK of autohoes.</li></ul>}
+          <div className="btn-row">
+            {brand && <button className="btn" onClick={() => setBrand('')}>Filter wissen</button>}
+            <Link className="btn-ghost" to="/c">Alle producten bekijken</Link>
+            <Link className="btn-ghost" to="/klantenservice">Neem contact op</Link>
+          </div>
+          {q && <div className="chips">{topCategories.map((k) => <Link key={k.id} to={`/c/${k.slug}`}>{k.title}</Link>)}</div>}
         </div>
       ) : (
         <div className="grid">{list.map((p) => <ProductCard key={p.id} p={p} />)}</div>
