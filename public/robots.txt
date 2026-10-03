@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /bestellen
+Disallow: /*?q=
+
+Sitemap: https://www.1classadditions.nl/sitemap.xml

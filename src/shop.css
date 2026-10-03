@@ -1,0 +1,69 @@
+/* Aanvullende stijlen voor winkelwagen, bestelaanvraag, productpagina en juridische pagina's.
+   Bewust apart van styles.css; selectors zijn specifiek genoeg om daar niet door overschreven te worden. */
+
+/* Totaalregels in lade en bestelaanvraag */
+.totals .row small { color: var(--muted); font-size: .84rem; text-align: right; max-width: 60%; }
+.totals .row.ship b { font-weight: 600; }
+.totals .row.ship b.free { color: var(--good); }
+.totals .note { font-size: .82rem; color: var(--muted); margin: -4px 0 12px; }
+.drawer .shipbar .bar { margin-bottom: 4px; }
+.lines li .rm { background: none; border: 0; padding: 4px 0 0; font: inherit; font-size: .82rem; color: var(--muted); text-decoration: underline; cursor: pointer; }
+.lines li .rm:hover { color: var(--red); }
+.qty.sm button:disabled { opacity: .35; cursor: not-allowed; }
+
+/* Bestelaanvraag */
+.request-note { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--navy); border-radius: var(--r-sm); padding: 14px 16px; margin: 4px 0 16px; font-size: .93rem; }
+.request-note p { margin: 0 0 .5em; }
+.request-note p:last-child { margin: 0; }
+.consent { display: flex !important; gap: 12px; align-items: flex-start; font-size: .92rem; font-weight: 500; }
+.consent a { color: var(--red); }
+.consent input { width: 24px !important; height: 24px; min-height: 0 !important; margin-top: 0; flex: 0 0 auto; padding: 0 !important; accent-color: var(--navy); }
+.sent-box { background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 28px; }
+.sent-box textarea { width: 100%; font: inherit; font-size: .88rem; border: 1.5px solid var(--field); border-radius: var(--r-sm); padding: 12px; background: var(--cream); margin: 8px 0 16px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 16px 0; }
+.code-in .msg { font-size: .85rem; }
+
+/* Productpagina */
+.pdp-price .vat { margin-left: 8px; }
+.variants .picked { display: block; font-size: .88rem; color: var(--muted); margin-top: 8px; }
+.stockline { display: flex; gap: 8px; align-items: center; font-size: .92rem; margin: 0 0 16px; }
+.stockline a { color: var(--navy); }
+.request-note a, .legal-page a, .sent-box a { color: var(--red); }
+.specs { display: grid; grid-template-columns: minmax(120px, 220px) 1fr; gap: 6px 20px; max-width: 75ch; margin: 0; }
+.specs dt { font-weight: 600; }
+.specs dd { margin: 0; }
+.lead.trunc { max-width: 60ch; }
+.pdp-page .sticky-buy.sb2 { display: none; }
+@media (max-width: 760px) {
+  .pdp-page { padding-bottom: 96px; }
+  .pdp-page .sticky-buy.sb2.show { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; gap: 12px; align-items: center; background: #fff; border-top: 1px solid var(--line); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -6px 20px rgba(18, 37, 74, .08); }
+  .pdp-page .sticky-buy.sb2 > div { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+  .pdp-page .sticky-buy.sb2 b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .88rem; }
+  .pdp-page .sticky-buy.sb2 span { font-size: .85rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pdp-page .sticky-buy.sb2 .btn { flex: 0 0 auto; white-space: nowrap; padding-inline: 18px; }
+}
+
+/* Lege staat en filters */
+.empty-state .btn-row { justify-content: center; }
+.empty-state h2 { font-size: 1.4rem; }
+.empty-state ul { list-style: none; padding: 0; margin: 12px 0; color: var(--muted); }
+
+/* Juridische pagina's */
+.legal-page h2 { font-size: 1.3rem; margin: 1.8em 0 .5em; }
+.legal-page h2:first-of-type { margin-top: 1em; }
+.legal-page ul { padding-left: 1.2em; }
+.legal-page li { margin-bottom: .35em; }
+.legal-page .formbox { background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 18px 22px; }
+.legal-page .formbox p { margin: 0 0 .6em; }
+.prose h2 { font-size: 1.25rem; margin: 1.6em 0 .4em; }
+
+/* Mobiel: galerij en koopblok mogen de pagina niet breder maken dan het scherm */
+.pdp > * { min-width: 0; }
+.pdp .thumbs { max-width: 100%; }
+.pdp .thumbs button { flex: 0 0 auto; }
+.grid > * { min-width: 0; }
+.card-foot { flex-wrap: wrap; gap: 8px; }
+.card-foot .btn-ghost.sm { white-space: nowrap; }
+.toolbar { flex-wrap: wrap; gap: 8px 16px; }
+.toolbar > div { display: flex; flex-wrap: wrap; gap: 8px; max-width: 100%; }
+.toolbar select { max-width: 100%; min-width: 0; }

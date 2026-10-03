@@ -2,15 +2,18 @@ import { Link } from 'react-router-dom'
 import { eur, hasRange, mainCat } from '../lib.js'
 import { useCart } from '../cart.jsx'
 import { Plus } from './Icons.jsx'
+import Img from './Img.jsx'
 
-export default function ProductCard({ p }) {
+const CARD_SIZES = '(max-width: 760px) 50vw, (max-width: 1060px) 33vw, 290px'
+
+export default function ProductCard({ p, priority = false }) {
   const { add } = useCart()
   const single = p.variants.length <= 1
   const cat = mainCat(p)
   return (
     <article className="card">
-      <Link to={`/p/${p.slug}`} className="card-img" aria-label={p.title}>
-        <img src={p.images[0]} alt={p.title} loading="lazy" />
+      <Link to={`/p/${p.slug}`} className="card-img" aria-hidden="true" tabIndex={-1}>
+        <Img src={p.images[0]} alt="" sizes={CARD_SIZES} priority={priority} />
         {p.old && <span className="badge sale">Actie</span>}
       </Link>
       <div className="card-body">

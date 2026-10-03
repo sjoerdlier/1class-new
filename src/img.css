@@ -1,0 +1,2 @@
+/* Afbeeldingen (Img.jsx): blokniveau, nooit breder dan de container, lichte plaatshouder tijdens laden. */
+.pic { display: block; max-width: 100%; background: var(--cream, #f6f1e7); }

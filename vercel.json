@@ -1,1 +1,2464 @@
-{ "rewrites": [{ "source": "/((?!img|assets|logo).*)", "destination": "/index.html" }] }
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; upgrade-insecure-requests"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(logo-.*|favicon.*|icon-.*|apple-touch-icon.png|og-image.png|site.webmanifest|robots.txt|sitemap.xml)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "nl-plaatjes-copy",
+      "destination": "nl-plaatjes",
+      "statusCode": 301
+    },
+    {
+      "source": "moltex-buitenhoes-sedan-copy",
+      "destination": "moltex-buitenhoes-sportwagens",
+      "statusCode": 301
+    },
+    {
+      "source": "moltex-buitenhoes-sportwagens-copy",
+      "destination": "moltex-buitenhoes-hatchback-en-stationwagen",
+      "statusCode": 301
+    },
+    {
+      "source": "hatchback-en-statiowagen-copy",
+      "destination": "moltex-buitenhoes-speciaal-op-maat",
+      "statusCode": 301
+    },
+    {
+      "source": "speciaal-op-maat-copy",
+      "destination": "supertex-binnenhoes-sportwagens",
+      "statusCode": 301
+    },
+    {
+      "source": "soldeer-ogen-voor-hoofd-schakelaar-copy",
+      "destination": "sleutel-voor-hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "hoofd-schakelaar-copy",
+      "destination": "soldeer-ogen-voor-hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "clean-weels",
+      "destination": "clean-wheels",
+      "statusCode": 301
+    },
+    {
+      "source": "air-freshner-tag",
+      "destination": "air-freshener-tag",
+      "statusCode": 301
+    },
+    {
+      "source": "hi-tech-micofibre-drying-towel",
+      "destination": "hi-tech-microfibre-drying-towel",
+      "statusCode": 301
+    },
+    {
+      "source": "milles-vspe-500-ml",
+      "destination": "millers-vspe-500-ml",
+      "statusCode": 301
+    },
+    {
+      "source": "supertex-binnenhoes-sedan-47400074",
+      "destination": "supertex-binnenhoes-sedan",
+      "statusCode": 301
+    },
+    {
+      "source": "gereedschap-set-engelse-maten-161182582",
+      "destination": "gereedschap-set-engelse-maten-92-delig",
+      "statusCode": 301
+    },
+    {
+      "source": "gereedschap-set-engelse-maten",
+      "destination": "gereedschap-set-engelse-maten-94-delig",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/service/about",
+      "destination": "/over-ons",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/service/shipping-returns",
+      "destination": "/verzenden",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/service/payment-methods",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/service/general-terms-conditions",
+      "destination": "/voorwaarden",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/service/disclaimer",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/service/privacy-policy",
+      "destination": "/privacy",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/service/legal-guarantee-notice",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/service",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/dealers",
+      "destination": "/dealers",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/fabels-feiten",
+      "destination": "/kennis",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/cart",
+      "destination": "/bestellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/checkout/:path*",
+      "destination": "/bestellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/account/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sitemap",
+      "destination": "/sitemap.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/blogs/:path*",
+      "destination": "/c/autohoezen/supertex-binnenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/collection/:path*",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/brands/:path*",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/tags/:path*",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/search/:term",
+      "destination": "/c?q=:term",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/supertex-binnenhoezen",
+      "destination": "/c/autohoezen/supertex-binnenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/supertex-binnenhoezen/:path+",
+      "destination": "/c/autohoezen/supertex-binnenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/maathoezen",
+      "destination": "/c/autohoezen/maathoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/maathoezen/:path+",
+      "destination": "/c/autohoezen/maathoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/onderhoud/penrite-oil",
+      "destination": "/c/onderhoud/penrite-oil",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/onderhoud/penrite-oil/:path+",
+      "destination": "/c/onderhoud/penrite-oil",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/topcovers",
+      "destination": "/c/autohoezen/topcovers",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/topcovers/:path+",
+      "destination": "/c/autohoezen/topcovers",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/moltex-buitenhoezen",
+      "destination": "/c/autohoezen/moltex-buitenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/moltex-buitenhoezen/:path+",
+      "destination": "/c/autohoezen/moltex-buitenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/onderhoud/ctek-acculaders",
+      "destination": "/c/onderhoud/ctek-acculaders",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/onderhoud/ctek-acculaders/:path+",
+      "destination": "/c/onderhoud/ctek-acculaders",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/onderhoud/autoglym",
+      "destination": "/c/onderhoud/autoglym",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/onderhoud/autoglym/:path+",
+      "destination": "/c/onderhoud/autoglym",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/accessoires",
+      "destination": "/c/accessoires",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/accessoires/:path+",
+      "destination": "/c/accessoires",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/stalling",
+      "destination": "/c/stalling",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/stalling/:path+",
+      "destination": "/c/stalling",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen",
+      "destination": "/c/autohoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autohoezen/:path+",
+      "destination": "/c/autohoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/onderhoud",
+      "destination": "/c/onderhoud",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/onderhoud/:path+",
+      "destination": "/c/onderhoud",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/kentekenplaten",
+      "destination": "/p/kentekenplaten",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/chromen-nummerplaat-lijsten",
+      "destination": "/p/chromen-nummerplaat-lijsten",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/ecomaxx",
+      "destination": "/p/ecomaxx",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/achterruit-verwarming",
+      "destination": "/p/achterruit-verwarming",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/engelse-bouten-en-moeren",
+      "destination": "/p/engelse-bouten-en-moeren",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/nl-plaatjes",
+      "destination": "/p/nl-plaatjes",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/supertex-binnenhoes-sedan",
+      "destination": "/p/supertex-binnenhoes-sedan",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/supertex-binnenhoes-specials",
+      "destination": "/p/supertex-binnenhoes-specials",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-mercedes",
+      "destination": "/p/sleutelhanger-mercedes",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-bmw",
+      "destination": "/p/sleutelhanger-bmw",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/maathoes-alle-merken-typen",
+      "destination": "/p/maathoes-alle-merken-typen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/cair-o-port",
+      "destination": "/p/cair-o-port",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-volkswagen",
+      "destination": "/p/sleutelhanger-volkswagen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/penrite-classic-light-20w-60",
+      "destination": "/p/penrite-classic-light-20w-60",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/opel-sleutelhanger-met-logo-zwart-leer",
+      "destination": "/p/opel-sleutelhanger-met-logo-zwart-leer",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/top-cover-voor-saab-9-3",
+      "destination": "/p/top-cover-voor-saab-9-3",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/moltex-buitenhoes-sedan",
+      "destination": "/p/moltex-buitenhoes-sedan",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/penrite-steering-box-lube",
+      "destination": "/p/penrite-steering-box-lube",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/supertex-binnenhoes-sportwagens",
+      "destination": "/p/supertex-binnenhoes-sportwagens",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/moltex-buitenhoes-speciaal-op-maat",
+      "destination": "/p/moltex-buitenhoes-speciaal-op-maat",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/moltex-buitenhoes-sportwagens",
+      "destination": "/p/moltex-buitenhoes-sportwagens",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/topcover",
+      "destination": "/p/topcover",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/acculader-xs-08",
+      "destination": "/p/acculader-xs-08",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/gereedschap-set-engelse-maten-92-delig",
+      "destination": "/p/gereedschap-set-engelse-maten-92-delig",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/fiat-sleutelhanger-met-logo",
+      "destination": "/p/fiat-sleutelhanger-met-logo",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-saab",
+      "destination": "/p/sleutelhanger-saab",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-ford-mustang",
+      "destination": "/p/sleutelhanger-ford-mustang",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/penrite-bgear-oil-30",
+      "destination": "/p/penrite-bgear-oil-30",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/big-digit-timer",
+      "destination": "/p/big-digit-timer",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/pad-125-mm-wit-medium",
+      "destination": "/p/pad-125-mm-wit-medium",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-mg-zwart",
+      "destination": "/p/sleutelhanger-mg-zwart",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/millers-vspe-500-ml",
+      "destination": "/p/millers-vspe-500-ml",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/moltex-buitenhoes-hatchback-en-stationwagen",
+      "destination": "/p/moltex-buitenhoes-hatchback-en-stationwagen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-jaguar",
+      "destination": "/p/sleutelhanger-jaguar",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/stallingsbok",
+      "destination": "/p/stallingsbok",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/pad-160-mm-zwart-zacht",
+      "destination": "/p/pad-160-mm-zwart-zacht",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/supertex-binnenhoes-hatchback",
+      "destination": "/p/supertex-binnenhoes-hatchback",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-citroen",
+      "destination": "/p/sleutelhanger-citroen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-alfa-romeo",
+      "destination": "/p/sleutelhanger-alfa-romeo",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/gereedschap-set-engelse-maten-94-delig",
+      "destination": "/p/gereedschap-set-engelse-maten-94-delig",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/penrite-su-damper-oil",
+      "destination": "/p/penrite-su-damper-oil",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/pad-160-mm-wit-medium",
+      "destination": "/p/pad-160-mm-wit-medium",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/clean-wheels",
+      "destination": "/p/clean-wheels",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/pre-war-modellen",
+      "destination": "/p/pre-war-modellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/hoofdlamp-led",
+      "destination": "/p/hoofdlamp-led",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/surface-detailing-clay-kit",
+      "destination": "/p/surface-detailing-clay-kit",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/convertible-soft-top-clean-protect",
+      "destination": "/p/convertible-soft-top-clean-protect",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/acculader-mxs-50",
+      "destination": "/p/acculader-mxs-50",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-audi",
+      "destination": "/p/sleutelhanger-audi",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-classic-mini",
+      "destination": "/p/sleutelhanger-classic-mini",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-volvo",
+      "destination": "/p/sleutelhanger-volvo",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-peugeot",
+      "destination": "/p/sleutelhanger-peugeot",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-lotus",
+      "destination": "/p/sleutelhanger-lotus",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/penrite-gear-oil-40",
+      "destination": "/p/penrite-gear-oil-40",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/hoofd-schakelaar",
+      "destination": "/p/hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/pad-125-mm-zwart-soft",
+      "destination": "/p/pad-125-mm-zwart-soft",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/paint-renovator",
+      "destination": "/p/paint-renovator",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/leather-care-balm",
+      "destination": "/p/leather-care-balm",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/instant-tyre-dressing",
+      "destination": "/p/instant-tyre-dressing",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/body-shampoo-conditioner",
+      "destination": "/p/body-shampoo-conditioner",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/dis-car-nect",
+      "destination": "/p/dis-car-nect",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/suv-modellen",
+      "destination": "/p/suv-modellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-rover",
+      "destination": "/p/sleutelhanger-rover",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-triumph",
+      "destination": "/p/sleutelhanger-triumph",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-mg",
+      "destination": "/p/sleutelhanger-mg",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/vinyl-rubber-care",
+      "destination": "/p/vinyl-rubber-care",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/ultimate-screenwash",
+      "destination": "/p/ultimate-screenwash",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/super-resin-polish",
+      "destination": "/p/super-resin-polish",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/leather-cleaner",
+      "destination": "/p/leather-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/extra-gloss-protection",
+      "destination": "/p/extra-gloss-protection",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/bird-dropping-wipes",
+      "destination": "/p/bird-dropping-wipes",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/autofresh",
+      "destination": "/p/autofresh",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/rapid-aqua-wax-kit",
+      "destination": "/p/rapid-aqua-wax-kit",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleepkabel",
+      "destination": "/p/sleepkabel",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/auto-shoes-tyre-rests",
+      "destination": "/p/auto-shoes-tyre-rests",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/hi-tech-flexi-water-blade",
+      "destination": "/p/hi-tech-flexi-water-blade",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/air-freshener-tag",
+      "destination": "/p/air-freshener-tag",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/rapid-detailer",
+      "destination": "/p/rapid-detailer",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/hi-tech-wielborstel",
+      "destination": "/p/hi-tech-wielborstel",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/fast-glass",
+      "destination": "/p/fast-glass",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/bumper-trim-gel",
+      "destination": "/p/bumper-trim-gel",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/cigar-plug-connector-cable",
+      "destination": "/p/cigar-plug-connector-cable",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/car-duster",
+      "destination": "/p/car-duster",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-triumph-149804532",
+      "destination": "/p/sleutelhanger-triumph-149804532",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/wd40-vochtverwijderaar",
+      "destination": "/p/wd40-vochtverwijderaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutel-voor-hoofd-schakelaar",
+      "destination": "/p/sleutel-voor-hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/soldeer-ogen-voor-hoofd-schakelaar",
+      "destination": "/p/soldeer-ogen-voor-hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/ctek-aansluitkabel",
+      "destination": "/p/ctek-aansluitkabel",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/interieur-spons",
+      "destination": "/p/interieur-spons",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/jumbo-spons",
+      "destination": "/p/jumbo-spons",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/microfiber-cloth-grey",
+      "destination": "/p/microfiber-cloth-grey",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/headlamp-restoration-kit",
+      "destination": "/p/headlamp-restoration-kit",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/hi-tech-microfibre-drying-towel",
+      "destination": "/p/hi-tech-microfibre-drying-towel",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/metal-polish",
+      "destination": "/p/metal-polish",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/interior-shampoo",
+      "destination": "/p/interior-shampoo",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/intensive-tar-remover",
+      "destination": "/p/intensive-tar-remover",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/hi-tech-interior-microfibre",
+      "destination": "/p/hi-tech-interior-microfibre",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/de-icer",
+      "destination": "/p/de-icer",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/custom-wheel-cleaner",
+      "destination": "/p/custom-wheel-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/active-insect-remover-spray",
+      "destination": "/p/active-insect-remover-spray",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/sleutelhanger-morris",
+      "destination": "/p/sleutelhanger-morris",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/hi-tech-polish-applicator",
+      "destination": "/p/hi-tech-polish-applicator",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/wheel-protector",
+      "destination": "/p/wheel-protector",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/ultra-deep-shine",
+      "destination": "/p/ultra-deep-shine",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/motorcycle-cleaner",
+      "destination": "/p/motorcycle-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/hi-tech-finishing-cloth",
+      "destination": "/p/hi-tech-finishing-cloth",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/engine-machine-cleaner",
+      "destination": "/p/engine-machine-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/caravan-motorhome-cleaner",
+      "destination": "/p/caravan-motorhome-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/car-glass-polish",
+      "destination": "/p/car-glass-polish",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/hi-tech-aqua-dry",
+      "destination": "/p/hi-tech-aqua-dry",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/perfect-interiors",
+      "destination": "/p/perfect-interiors",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/:slug([^/]+)",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/service/about",
+      "destination": "/over-ons",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/service/shipping-returns",
+      "destination": "/verzenden",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/service/payment-methods",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/service/general-terms-conditions",
+      "destination": "/voorwaarden",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/service/disclaimer",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/service/privacy-policy",
+      "destination": "/privacy",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/service/legal-guarantee-notice",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/service",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/dealers",
+      "destination": "/dealers",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/fabels-feiten",
+      "destination": "/kennis",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/cart",
+      "destination": "/bestellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/checkout/:path*",
+      "destination": "/bestellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/account/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sitemap",
+      "destination": "/sitemap.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/blogs/:path*",
+      "destination": "/c/autohoezen/supertex-binnenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/collection/:path*",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/brands/:path*",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/tags/:path*",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/search/:term",
+      "destination": "/c?q=:term",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/supertex-binnenhoezen",
+      "destination": "/c/autohoezen/supertex-binnenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/supertex-binnenhoezen/:path+",
+      "destination": "/c/autohoezen/supertex-binnenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/maathoezen",
+      "destination": "/c/autohoezen/maathoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/maathoezen/:path+",
+      "destination": "/c/autohoezen/maathoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/onderhoud/penrite-oil",
+      "destination": "/c/onderhoud/penrite-oil",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/onderhoud/penrite-oil/:path+",
+      "destination": "/c/onderhoud/penrite-oil",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/topcovers",
+      "destination": "/c/autohoezen/topcovers",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/topcovers/:path+",
+      "destination": "/c/autohoezen/topcovers",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/moltex-buitenhoezen",
+      "destination": "/c/autohoezen/moltex-buitenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/moltex-buitenhoezen/:path+",
+      "destination": "/c/autohoezen/moltex-buitenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/onderhoud/ctek-acculaders",
+      "destination": "/c/onderhoud/ctek-acculaders",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/onderhoud/ctek-acculaders/:path+",
+      "destination": "/c/onderhoud/ctek-acculaders",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/onderhoud/autoglym",
+      "destination": "/c/onderhoud/autoglym",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/onderhoud/autoglym/:path+",
+      "destination": "/c/onderhoud/autoglym",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/accessoires",
+      "destination": "/c/accessoires",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/accessoires/:path+",
+      "destination": "/c/accessoires",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/stalling",
+      "destination": "/c/stalling",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/stalling/:path+",
+      "destination": "/c/stalling",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen",
+      "destination": "/c/autohoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autohoezen/:path+",
+      "destination": "/c/autohoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/onderhoud",
+      "destination": "/c/onderhoud",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/onderhoud/:path+",
+      "destination": "/c/onderhoud",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/kentekenplaten",
+      "destination": "/p/kentekenplaten",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/chromen-nummerplaat-lijsten",
+      "destination": "/p/chromen-nummerplaat-lijsten",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/ecomaxx",
+      "destination": "/p/ecomaxx",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/achterruit-verwarming",
+      "destination": "/p/achterruit-verwarming",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/engelse-bouten-en-moeren",
+      "destination": "/p/engelse-bouten-en-moeren",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/nl-plaatjes",
+      "destination": "/p/nl-plaatjes",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/supertex-binnenhoes-sedan",
+      "destination": "/p/supertex-binnenhoes-sedan",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/supertex-binnenhoes-specials",
+      "destination": "/p/supertex-binnenhoes-specials",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-mercedes",
+      "destination": "/p/sleutelhanger-mercedes",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-bmw",
+      "destination": "/p/sleutelhanger-bmw",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/maathoes-alle-merken-typen",
+      "destination": "/p/maathoes-alle-merken-typen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/cair-o-port",
+      "destination": "/p/cair-o-port",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-volkswagen",
+      "destination": "/p/sleutelhanger-volkswagen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/penrite-classic-light-20w-60",
+      "destination": "/p/penrite-classic-light-20w-60",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/opel-sleutelhanger-met-logo-zwart-leer",
+      "destination": "/p/opel-sleutelhanger-met-logo-zwart-leer",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/top-cover-voor-saab-9-3",
+      "destination": "/p/top-cover-voor-saab-9-3",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/moltex-buitenhoes-sedan",
+      "destination": "/p/moltex-buitenhoes-sedan",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/penrite-steering-box-lube",
+      "destination": "/p/penrite-steering-box-lube",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/supertex-binnenhoes-sportwagens",
+      "destination": "/p/supertex-binnenhoes-sportwagens",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/moltex-buitenhoes-speciaal-op-maat",
+      "destination": "/p/moltex-buitenhoes-speciaal-op-maat",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/moltex-buitenhoes-sportwagens",
+      "destination": "/p/moltex-buitenhoes-sportwagens",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/topcover",
+      "destination": "/p/topcover",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/acculader-xs-08",
+      "destination": "/p/acculader-xs-08",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/gereedschap-set-engelse-maten-92-delig",
+      "destination": "/p/gereedschap-set-engelse-maten-92-delig",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/fiat-sleutelhanger-met-logo",
+      "destination": "/p/fiat-sleutelhanger-met-logo",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-saab",
+      "destination": "/p/sleutelhanger-saab",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-ford-mustang",
+      "destination": "/p/sleutelhanger-ford-mustang",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/penrite-bgear-oil-30",
+      "destination": "/p/penrite-bgear-oil-30",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/big-digit-timer",
+      "destination": "/p/big-digit-timer",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/pad-125-mm-wit-medium",
+      "destination": "/p/pad-125-mm-wit-medium",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-mg-zwart",
+      "destination": "/p/sleutelhanger-mg-zwart",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/millers-vspe-500-ml",
+      "destination": "/p/millers-vspe-500-ml",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/moltex-buitenhoes-hatchback-en-stationwagen",
+      "destination": "/p/moltex-buitenhoes-hatchback-en-stationwagen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-jaguar",
+      "destination": "/p/sleutelhanger-jaguar",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/stallingsbok",
+      "destination": "/p/stallingsbok",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/pad-160-mm-zwart-zacht",
+      "destination": "/p/pad-160-mm-zwart-zacht",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/supertex-binnenhoes-hatchback",
+      "destination": "/p/supertex-binnenhoes-hatchback",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-citroen",
+      "destination": "/p/sleutelhanger-citroen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-alfa-romeo",
+      "destination": "/p/sleutelhanger-alfa-romeo",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/gereedschap-set-engelse-maten-94-delig",
+      "destination": "/p/gereedschap-set-engelse-maten-94-delig",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/penrite-su-damper-oil",
+      "destination": "/p/penrite-su-damper-oil",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/pad-160-mm-wit-medium",
+      "destination": "/p/pad-160-mm-wit-medium",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/clean-wheels",
+      "destination": "/p/clean-wheels",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/pre-war-modellen",
+      "destination": "/p/pre-war-modellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/hoofdlamp-led",
+      "destination": "/p/hoofdlamp-led",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/surface-detailing-clay-kit",
+      "destination": "/p/surface-detailing-clay-kit",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/convertible-soft-top-clean-protect",
+      "destination": "/p/convertible-soft-top-clean-protect",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/acculader-mxs-50",
+      "destination": "/p/acculader-mxs-50",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-audi",
+      "destination": "/p/sleutelhanger-audi",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-classic-mini",
+      "destination": "/p/sleutelhanger-classic-mini",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-volvo",
+      "destination": "/p/sleutelhanger-volvo",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-peugeot",
+      "destination": "/p/sleutelhanger-peugeot",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-lotus",
+      "destination": "/p/sleutelhanger-lotus",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/penrite-gear-oil-40",
+      "destination": "/p/penrite-gear-oil-40",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/hoofd-schakelaar",
+      "destination": "/p/hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/pad-125-mm-zwart-soft",
+      "destination": "/p/pad-125-mm-zwart-soft",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/paint-renovator",
+      "destination": "/p/paint-renovator",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/leather-care-balm",
+      "destination": "/p/leather-care-balm",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/instant-tyre-dressing",
+      "destination": "/p/instant-tyre-dressing",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/body-shampoo-conditioner",
+      "destination": "/p/body-shampoo-conditioner",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/dis-car-nect",
+      "destination": "/p/dis-car-nect",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/suv-modellen",
+      "destination": "/p/suv-modellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-rover",
+      "destination": "/p/sleutelhanger-rover",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-triumph",
+      "destination": "/p/sleutelhanger-triumph",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-mg",
+      "destination": "/p/sleutelhanger-mg",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/vinyl-rubber-care",
+      "destination": "/p/vinyl-rubber-care",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/ultimate-screenwash",
+      "destination": "/p/ultimate-screenwash",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/super-resin-polish",
+      "destination": "/p/super-resin-polish",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/leather-cleaner",
+      "destination": "/p/leather-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/extra-gloss-protection",
+      "destination": "/p/extra-gloss-protection",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/bird-dropping-wipes",
+      "destination": "/p/bird-dropping-wipes",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/autofresh",
+      "destination": "/p/autofresh",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/rapid-aqua-wax-kit",
+      "destination": "/p/rapid-aqua-wax-kit",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleepkabel",
+      "destination": "/p/sleepkabel",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/auto-shoes-tyre-rests",
+      "destination": "/p/auto-shoes-tyre-rests",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/hi-tech-flexi-water-blade",
+      "destination": "/p/hi-tech-flexi-water-blade",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/air-freshener-tag",
+      "destination": "/p/air-freshener-tag",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/rapid-detailer",
+      "destination": "/p/rapid-detailer",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/hi-tech-wielborstel",
+      "destination": "/p/hi-tech-wielborstel",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/fast-glass",
+      "destination": "/p/fast-glass",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/bumper-trim-gel",
+      "destination": "/p/bumper-trim-gel",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/cigar-plug-connector-cable",
+      "destination": "/p/cigar-plug-connector-cable",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/car-duster",
+      "destination": "/p/car-duster",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-triumph-149804532",
+      "destination": "/p/sleutelhanger-triumph-149804532",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/wd40-vochtverwijderaar",
+      "destination": "/p/wd40-vochtverwijderaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutel-voor-hoofd-schakelaar",
+      "destination": "/p/sleutel-voor-hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/soldeer-ogen-voor-hoofd-schakelaar",
+      "destination": "/p/soldeer-ogen-voor-hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/ctek-aansluitkabel",
+      "destination": "/p/ctek-aansluitkabel",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/interieur-spons",
+      "destination": "/p/interieur-spons",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/jumbo-spons",
+      "destination": "/p/jumbo-spons",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/microfiber-cloth-grey",
+      "destination": "/p/microfiber-cloth-grey",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/headlamp-restoration-kit",
+      "destination": "/p/headlamp-restoration-kit",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/hi-tech-microfibre-drying-towel",
+      "destination": "/p/hi-tech-microfibre-drying-towel",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/metal-polish",
+      "destination": "/p/metal-polish",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/interior-shampoo",
+      "destination": "/p/interior-shampoo",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/intensive-tar-remover",
+      "destination": "/p/intensive-tar-remover",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/hi-tech-interior-microfibre",
+      "destination": "/p/hi-tech-interior-microfibre",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/de-icer",
+      "destination": "/p/de-icer",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/custom-wheel-cleaner",
+      "destination": "/p/custom-wheel-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/active-insect-remover-spray",
+      "destination": "/p/active-insect-remover-spray",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/sleutelhanger-morris",
+      "destination": "/p/sleutelhanger-morris",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/hi-tech-polish-applicator",
+      "destination": "/p/hi-tech-polish-applicator",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/wheel-protector",
+      "destination": "/p/wheel-protector",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/ultra-deep-shine",
+      "destination": "/p/ultra-deep-shine",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/motorcycle-cleaner",
+      "destination": "/p/motorcycle-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/hi-tech-finishing-cloth",
+      "destination": "/p/hi-tech-finishing-cloth",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/engine-machine-cleaner",
+      "destination": "/p/engine-machine-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/caravan-motorhome-cleaner",
+      "destination": "/p/caravan-motorhome-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/car-glass-polish",
+      "destination": "/p/car-glass-polish",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/hi-tech-aqua-dry",
+      "destination": "/p/hi-tech-aqua-dry",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/perfect-interiors",
+      "destination": "/p/perfect-interiors",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/:slug([^/]+)",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/service/about",
+      "destination": "/over-ons",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/service/shipping-returns",
+      "destination": "/verzenden",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/service/payment-methods",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/service/general-terms-conditions",
+      "destination": "/voorwaarden",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/service/disclaimer",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/service/privacy-policy",
+      "destination": "/privacy",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/service/legal-guarantee-notice",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/service",
+      "destination": "/klantenservice",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/dealers",
+      "destination": "/dealers",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/fabels-feiten",
+      "destination": "/kennis",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/cart",
+      "destination": "/bestellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/checkout/:path*",
+      "destination": "/bestellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/account/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sitemap",
+      "destination": "/sitemap.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/blogs/:path*",
+      "destination": "/c/autohoezen/supertex-binnenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/collection/:path*",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/brands/:path*",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/tags/:path*",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/search/:term",
+      "destination": "/c?q=:term",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/supertex-binnenhoezen",
+      "destination": "/c/autohoezen/supertex-binnenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/supertex-binnenhoezen/:path+",
+      "destination": "/c/autohoezen/supertex-binnenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/maathoezen",
+      "destination": "/c/autohoezen/maathoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/maathoezen/:path+",
+      "destination": "/c/autohoezen/maathoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/onderhoud/penrite-oil",
+      "destination": "/c/onderhoud/penrite-oil",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/onderhoud/penrite-oil/:path+",
+      "destination": "/c/onderhoud/penrite-oil",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/topcovers",
+      "destination": "/c/autohoezen/topcovers",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/topcovers/:path+",
+      "destination": "/c/autohoezen/topcovers",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/moltex-buitenhoezen",
+      "destination": "/c/autohoezen/moltex-buitenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/moltex-buitenhoezen/:path+",
+      "destination": "/c/autohoezen/moltex-buitenhoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/onderhoud/ctek-acculaders",
+      "destination": "/c/onderhoud/ctek-acculaders",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/onderhoud/ctek-acculaders/:path+",
+      "destination": "/c/onderhoud/ctek-acculaders",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/onderhoud/autoglym",
+      "destination": "/c/onderhoud/autoglym",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/onderhoud/autoglym/:path+",
+      "destination": "/c/onderhoud/autoglym",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/accessoires",
+      "destination": "/c/accessoires",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/accessoires/:path+",
+      "destination": "/c/accessoires",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/stalling",
+      "destination": "/c/stalling",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/stalling/:path+",
+      "destination": "/c/stalling",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen",
+      "destination": "/c/autohoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autohoezen/:path+",
+      "destination": "/c/autohoezen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/onderhoud",
+      "destination": "/c/onderhoud",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/onderhoud/:path+",
+      "destination": "/c/onderhoud",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/kentekenplaten",
+      "destination": "/p/kentekenplaten",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/chromen-nummerplaat-lijsten",
+      "destination": "/p/chromen-nummerplaat-lijsten",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/ecomaxx",
+      "destination": "/p/ecomaxx",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/achterruit-verwarming",
+      "destination": "/p/achterruit-verwarming",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/engelse-bouten-en-moeren",
+      "destination": "/p/engelse-bouten-en-moeren",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/nl-plaatjes",
+      "destination": "/p/nl-plaatjes",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/supertex-binnenhoes-sedan",
+      "destination": "/p/supertex-binnenhoes-sedan",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/supertex-binnenhoes-specials",
+      "destination": "/p/supertex-binnenhoes-specials",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-mercedes",
+      "destination": "/p/sleutelhanger-mercedes",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-bmw",
+      "destination": "/p/sleutelhanger-bmw",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/maathoes-alle-merken-typen",
+      "destination": "/p/maathoes-alle-merken-typen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/cair-o-port",
+      "destination": "/p/cair-o-port",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-volkswagen",
+      "destination": "/p/sleutelhanger-volkswagen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/penrite-classic-light-20w-60",
+      "destination": "/p/penrite-classic-light-20w-60",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/opel-sleutelhanger-met-logo-zwart-leer",
+      "destination": "/p/opel-sleutelhanger-met-logo-zwart-leer",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/top-cover-voor-saab-9-3",
+      "destination": "/p/top-cover-voor-saab-9-3",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/moltex-buitenhoes-sedan",
+      "destination": "/p/moltex-buitenhoes-sedan",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/penrite-steering-box-lube",
+      "destination": "/p/penrite-steering-box-lube",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/supertex-binnenhoes-sportwagens",
+      "destination": "/p/supertex-binnenhoes-sportwagens",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/moltex-buitenhoes-speciaal-op-maat",
+      "destination": "/p/moltex-buitenhoes-speciaal-op-maat",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/moltex-buitenhoes-sportwagens",
+      "destination": "/p/moltex-buitenhoes-sportwagens",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/topcover",
+      "destination": "/p/topcover",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/acculader-xs-08",
+      "destination": "/p/acculader-xs-08",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/gereedschap-set-engelse-maten-92-delig",
+      "destination": "/p/gereedschap-set-engelse-maten-92-delig",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/fiat-sleutelhanger-met-logo",
+      "destination": "/p/fiat-sleutelhanger-met-logo",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-saab",
+      "destination": "/p/sleutelhanger-saab",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-ford-mustang",
+      "destination": "/p/sleutelhanger-ford-mustang",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/penrite-bgear-oil-30",
+      "destination": "/p/penrite-bgear-oil-30",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/big-digit-timer",
+      "destination": "/p/big-digit-timer",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/pad-125-mm-wit-medium",
+      "destination": "/p/pad-125-mm-wit-medium",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-mg-zwart",
+      "destination": "/p/sleutelhanger-mg-zwart",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/millers-vspe-500-ml",
+      "destination": "/p/millers-vspe-500-ml",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/moltex-buitenhoes-hatchback-en-stationwagen",
+      "destination": "/p/moltex-buitenhoes-hatchback-en-stationwagen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-jaguar",
+      "destination": "/p/sleutelhanger-jaguar",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/stallingsbok",
+      "destination": "/p/stallingsbok",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/pad-160-mm-zwart-zacht",
+      "destination": "/p/pad-160-mm-zwart-zacht",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/supertex-binnenhoes-hatchback",
+      "destination": "/p/supertex-binnenhoes-hatchback",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-citroen",
+      "destination": "/p/sleutelhanger-citroen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-alfa-romeo",
+      "destination": "/p/sleutelhanger-alfa-romeo",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/gereedschap-set-engelse-maten-94-delig",
+      "destination": "/p/gereedschap-set-engelse-maten-94-delig",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/penrite-su-damper-oil",
+      "destination": "/p/penrite-su-damper-oil",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/pad-160-mm-wit-medium",
+      "destination": "/p/pad-160-mm-wit-medium",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/clean-wheels",
+      "destination": "/p/clean-wheels",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/pre-war-modellen",
+      "destination": "/p/pre-war-modellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/hoofdlamp-led",
+      "destination": "/p/hoofdlamp-led",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/surface-detailing-clay-kit",
+      "destination": "/p/surface-detailing-clay-kit",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/convertible-soft-top-clean-protect",
+      "destination": "/p/convertible-soft-top-clean-protect",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/acculader-mxs-50",
+      "destination": "/p/acculader-mxs-50",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-audi",
+      "destination": "/p/sleutelhanger-audi",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-classic-mini",
+      "destination": "/p/sleutelhanger-classic-mini",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-volvo",
+      "destination": "/p/sleutelhanger-volvo",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-peugeot",
+      "destination": "/p/sleutelhanger-peugeot",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-lotus",
+      "destination": "/p/sleutelhanger-lotus",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/penrite-gear-oil-40",
+      "destination": "/p/penrite-gear-oil-40",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/hoofd-schakelaar",
+      "destination": "/p/hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/pad-125-mm-zwart-soft",
+      "destination": "/p/pad-125-mm-zwart-soft",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/paint-renovator",
+      "destination": "/p/paint-renovator",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/leather-care-balm",
+      "destination": "/p/leather-care-balm",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/instant-tyre-dressing",
+      "destination": "/p/instant-tyre-dressing",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/body-shampoo-conditioner",
+      "destination": "/p/body-shampoo-conditioner",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/dis-car-nect",
+      "destination": "/p/dis-car-nect",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/suv-modellen",
+      "destination": "/p/suv-modellen",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-rover",
+      "destination": "/p/sleutelhanger-rover",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-triumph",
+      "destination": "/p/sleutelhanger-triumph",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-mg",
+      "destination": "/p/sleutelhanger-mg",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/vinyl-rubber-care",
+      "destination": "/p/vinyl-rubber-care",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/ultimate-screenwash",
+      "destination": "/p/ultimate-screenwash",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/super-resin-polish",
+      "destination": "/p/super-resin-polish",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/leather-cleaner",
+      "destination": "/p/leather-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/extra-gloss-protection",
+      "destination": "/p/extra-gloss-protection",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/bird-dropping-wipes",
+      "destination": "/p/bird-dropping-wipes",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/autofresh",
+      "destination": "/p/autofresh",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/rapid-aqua-wax-kit",
+      "destination": "/p/rapid-aqua-wax-kit",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleepkabel",
+      "destination": "/p/sleepkabel",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/auto-shoes-tyre-rests",
+      "destination": "/p/auto-shoes-tyre-rests",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/hi-tech-flexi-water-blade",
+      "destination": "/p/hi-tech-flexi-water-blade",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/air-freshener-tag",
+      "destination": "/p/air-freshener-tag",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/rapid-detailer",
+      "destination": "/p/rapid-detailer",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/hi-tech-wielborstel",
+      "destination": "/p/hi-tech-wielborstel",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/fast-glass",
+      "destination": "/p/fast-glass",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/bumper-trim-gel",
+      "destination": "/p/bumper-trim-gel",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/cigar-plug-connector-cable",
+      "destination": "/p/cigar-plug-connector-cable",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/car-duster",
+      "destination": "/p/car-duster",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-triumph-149804532",
+      "destination": "/p/sleutelhanger-triumph-149804532",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/wd40-vochtverwijderaar",
+      "destination": "/p/wd40-vochtverwijderaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutel-voor-hoofd-schakelaar",
+      "destination": "/p/sleutel-voor-hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/soldeer-ogen-voor-hoofd-schakelaar",
+      "destination": "/p/soldeer-ogen-voor-hoofd-schakelaar",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/ctek-aansluitkabel",
+      "destination": "/p/ctek-aansluitkabel",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/interieur-spons",
+      "destination": "/p/interieur-spons",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/jumbo-spons",
+      "destination": "/p/jumbo-spons",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/microfiber-cloth-grey",
+      "destination": "/p/microfiber-cloth-grey",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/headlamp-restoration-kit",
+      "destination": "/p/headlamp-restoration-kit",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/hi-tech-microfibre-drying-towel",
+      "destination": "/p/hi-tech-microfibre-drying-towel",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/metal-polish",
+      "destination": "/p/metal-polish",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/interior-shampoo",
+      "destination": "/p/interior-shampoo",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/intensive-tar-remover",
+      "destination": "/p/intensive-tar-remover",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/hi-tech-interior-microfibre",
+      "destination": "/p/hi-tech-interior-microfibre",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/de-icer",
+      "destination": "/p/de-icer",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/custom-wheel-cleaner",
+      "destination": "/p/custom-wheel-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/active-insect-remover-spray",
+      "destination": "/p/active-insect-remover-spray",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/sleutelhanger-morris",
+      "destination": "/p/sleutelhanger-morris",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/hi-tech-polish-applicator",
+      "destination": "/p/hi-tech-polish-applicator",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/wheel-protector",
+      "destination": "/p/wheel-protector",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/ultra-deep-shine",
+      "destination": "/p/ultra-deep-shine",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/motorcycle-cleaner",
+      "destination": "/p/motorcycle-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/hi-tech-finishing-cloth",
+      "destination": "/p/hi-tech-finishing-cloth",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/engine-machine-cleaner",
+      "destination": "/p/engine-machine-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/caravan-motorhome-cleaner",
+      "destination": "/p/caravan-motorhome-cleaner",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/car-glass-polish",
+      "destination": "/p/car-glass-polish",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/hi-tech-aqua-dry",
+      "destination": "/p/hi-tech-aqua-dry",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/perfect-interiors",
+      "destination": "/p/perfect-interiors",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/:slug([^/]+)",
+      "destination": "/c",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/nl/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/de/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "1classadditions.nl"
+        }
+      ],
+      "destination": "https://www.1classadditions.nl/:path",
+      "statusCode": 301
+    }
+  ]
+}
